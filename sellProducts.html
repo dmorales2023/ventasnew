@@ -9,14 +9,14 @@
 <body>
     <h1>Carrito de Compras</h1>
     <div class="container">
-
+        <h2>Inventario</h2>
         <div id="inventory"></div>
         
-        
+       
         <div id="cart"></div>
-        <h3>Total: Q<span id="total">0</span></h3>
+        <h3 class="total">Total: Q<span id="total">0</span></h3>
         <input type="number" id="cashReceived" placeholder="Efectivo recibido" oninput="calculateChange()">
-        <h3>Cambio: Q<span id="change">0</span></h3>
+        <h3 class="change">Cambio: Q<span id="change">0</span></h3>
         <button onclick="finalizeSale()">Finalizar Venta</button>
         <button onclick="goHome()">Volver a Inicio</button>
     </div>
