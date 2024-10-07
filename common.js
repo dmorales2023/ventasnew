@@ -7,6 +7,11 @@ function addProduct() {
     const image = document.getElementById('productImage').files[0];
     const stock = document.getElementById('productStock').value;
 
+    if (!name || !price || !image || !stock) {
+        alert('Por favor, completa todos los campos.');
+        return;
+    }
+
     const reader = new FileReader();
     reader.onload = function(e) {
         const product = { name, price, image: e.target.result, stock: parseInt(stock) };
@@ -14,12 +19,12 @@ function addProduct() {
         localStorage.setItem('inventory', JSON.stringify(inventory));
         displayInventory();
         clearFields();
-        alert('Producto agregado exitosamente'); // Notificación
+        alert('Producto agregado exitosamente');
     };
     reader.readAsDataURL(image);
 }
 
-function displayInventory() {
+function displayInventory(showDeleteButton = true, showAddToCartButton = false) {
     const inventoryDiv = document.getElementById('inventory');
     inventoryDiv.innerHTML = '';
     inventory.forEach((product, index) => {
@@ -27,12 +32,34 @@ function displayInventory() {
             <div class="product">
                 <span>${product.name} - Q${product.price} - Stock: ${product.stock}</span>
                 <img src="${product.image}" alt="${product.name}">
-                <input type="number" id="quantity${index}" class="quantity" placeholder="Cant.">
-                <button onclick="addToCart(${index})">Agregar al Carrito</button>
-              
+                ${showDeleteButton ? `<button onclick="removeProduct(${index})">Eliminar</button>` : ''}
+                ${showAddToCartButton ? `
+                    <input type="number" id="quantity${index}" class="quantity" placeholder="Cant.">
+                    <button onclick="addToCart(${index})">Agregar al Carrito</button>
+                ` : `
+                    <input type="number" id="newStock${index}" placeholder="Nuevo Stock">
+                    <button onclick="updateStock(${index})">Modificar Stock</button>
+                `}
             </div>
         `;
     });
+}
+
+function removeProduct(index) {
+    inventory.splice(index, 1);
+    localStorage.setItem('inventory', JSON.stringify(inventory));
+    displayInventory();
+}
+
+function updateStock(index) {
+    const newStock = parseInt(document.getElementById(`newStock${index}`).value);
+    if (newStock >= 0) {
+        inventory[index].stock = newStock;
+        localStorage.setItem('inventory', JSON.stringify(inventory));
+        displayInventory();
+    } else {
+        alert('El stock debe ser un número positivo');
+    }
 }
 
 function addToCart(index) {
@@ -42,7 +69,7 @@ function addToCart(index) {
         cart.push({ ...product, quantity });
         product.stock -= quantity;
         localStorage.setItem('inventory', JSON.stringify(inventory));
-        displayInventory();
+        displayInventory(false, true);
         displayCart();
         clearFields();
     } else {
@@ -55,7 +82,6 @@ function displayCart() {
     cartDiv.innerHTML = '';
     let total = 0;
 
-    // Agregar el texto "Agregados para vender" al principio
     cartDiv.innerHTML += `
         <div class="cart-header">
             <h2>Agregados para vender</h2>
@@ -75,12 +101,6 @@ function displayCart() {
     document.getElementById('total').innerText = total;
 }
 
-function removeProduct(index) {
-    inventory.splice(index, 1);
-    localStorage.setItem('inventory', JSON.stringify(inventory));
-    displayInventory();
-}
-
 function removeFromCart(index) {
     const product = cart[index];
     inventory.forEach(item => {
@@ -90,7 +110,7 @@ function removeFromCart(index) {
     });
     cart.splice(index, 1);
     localStorage.setItem('inventory', JSON.stringify(inventory));
-    displayInventory();
+    displayInventory(false, true);
     displayCart();
 }
 
