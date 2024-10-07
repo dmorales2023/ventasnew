@@ -11,6 +11,15 @@ h1 {
     margin-bottom: 20px;
 }
 
+h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 2em; /* Aumentar el tamaño de los subtítulos */
+}
+
 button {
     font-size: 1.5em;
     margin: 20px;
@@ -37,9 +46,20 @@ button:hover {
     object-fit: cover;
 }
 
+.total, .change {
+    font-size: 2.5em; /* Aumentar el tamaño del total y cambio */
+    margin-top: 20px;
+}
+
 @media (max-width: 600px) {
     h1 {
         font-size: 3em;
+    }
+    h2 {
+        font-size: 2em;
+    }
+    h3 {
+        font-size: 1.5em;
     }
     button {
         font-size: 1.2em;
@@ -47,5 +67,8 @@ button:hover {
     }
     .product img, .cart-item img {
         max-width: 100px;
+    }
+    .total, .change {
+        font-size: 2em; /* Ajustar el tamaño para pantallas pequeñas */
     }
 }
