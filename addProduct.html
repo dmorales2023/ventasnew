@@ -9,7 +9,7 @@
 <body>
     <h1>Ingresar Productos</h1>
     <div class="container">
-       
+        <h2>Agregar Producto</h2>
         <input type="text" id="productName" placeholder="Nombre del producto">
         <input type="number" id="productPrice" placeholder="Precio en Quetzales">
         <input type="file" id="productImage">
@@ -20,24 +20,6 @@
     </div>
     <script src="common.js"></script>
     <script>
-        function addProduct() {
-            const name = document.getElementById('productName').value;
-            const price = document.getElementById('productPrice').value;
-            const image = document.getElementById('productImage').files[0];
-            const stock = document.getElementById('productStock').value;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const product = { name, price, image: e.target.result, stock: parseInt(stock) };
-                inventory.push(product);
-                localStorage.setItem('inventory', JSON.stringify(inventory));
-                displayInventory();
-                clearFields();
-                document.getElementById('notification').innerText = 'Producto agregado exitosamente';
-            };
-            reader.readAsDataURL(image);
-        }
-
         function goHome() {
             window.location.href = 'index.html';
         }
