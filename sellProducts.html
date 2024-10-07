@@ -9,20 +9,20 @@
 <body>
     <h1>Carrito de Compras</h1>
     <div class="container">
-        <h2>Inventario</h2>
+      
         <div id="inventory"></div>
         
-       
         <div id="cart"></div>
         <h3 class="total">Total: Q<span id="total">0</span></h3>
         <input type="number" id="cashReceived" placeholder="Efectivo recibido" oninput="calculateChange()">
         <h3 class="change">Cambio: Q<span id="change">0</span></h3>
+        <p style="font-size: medium;">Así que mi Dios les proveerá de todo lo que necesiten, conforme a las gloriosas riquezas que tiene en Cristo Jesús. (Filipenses 4:19)</p>
         <button onclick="finalizeSale()">Finalizar Venta</button>
         <button onclick="goHome()">Volver a Inicio</button>
     </div>
     <script src="common.js"></script>
     <script>
-        displayInventory();
+        displayInventory(false, true);
 
         function goHome() {
             window.location.href = 'index.html';
