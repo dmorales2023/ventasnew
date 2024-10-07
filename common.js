@@ -29,7 +29,7 @@ function displayInventory() {
                 <img src="${product.image}" alt="${product.name}">
                 <input type="number" id="quantity${index}" class="quantity" placeholder="Cant.">
                 <button onclick="addToCart(${index})">Agregar al Carrito</button>
-                <button onclick="removeProduct(${index})">Eliminar</button>
+              
             </div>
         `;
     });
@@ -54,6 +54,14 @@ function displayCart() {
     const cartDiv = document.getElementById('cart');
     cartDiv.innerHTML = '';
     let total = 0;
+
+    // Agregar el texto "Agregados para vender" al principio
+    cartDiv.innerHTML += `
+        <div class="cart-header">
+            <h2>Agregados para vender</h2>
+        </div>
+    `;
+
     cart.forEach((product, index) => {
         total += product.price * product.quantity;
         cartDiv.innerHTML += `
