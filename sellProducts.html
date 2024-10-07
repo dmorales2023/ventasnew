@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vender Productos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Carrito de Compras</h1>
+    <div class="container">
+
+        <div id="inventory"></div>
+        
+        
+        <div id="cart"></div>
+        <h3>Total: Q<span id="total">0</span></h3>
+        <input type="number" id="cashReceived" placeholder="Efectivo recibido" oninput="calculateChange()">
+        <h3>Cambio: Q<span id="change">0</span></h3>
+        <button onclick="finalizeSale()">Finalizar Venta</button>
+        <button onclick="goHome()">Volver a Inicio</button>
+    </div>
+    <script src="common.js"></script>
+    <script>
+        displayInventory();
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

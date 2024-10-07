@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresar Productos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Ingresar Productos</h1>
+    <div class="container">
+       
+        <input type="text" id="productName" placeholder="Nombre del producto">
+        <input type="number" id="productPrice" placeholder="Precio en Quetzales">
+        <input type="file" id="productImage">
+        <input type="number" id="productStock" placeholder="Disponibilidad">
+        <button onclick="addProduct()">Agregar al Inventario</button>
+        <button onclick="goHome()">Volver a Inicio</button>
+        <p id="notification" style="color: green;"></p>
+    </div>
+    <script src="common.js"></script>
+    <script>
+        function addProduct() {
+            const name = document.getElementById('productName').value;
+            const price = document.getElementById('productPrice').value;
+            const image = document.getElementById('productImage').files[0];
+            const stock = document.getElementById('productStock').value;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const product = { name, price, image: e.target.result, stock: parseInt(stock) };
+                inventory.push(product);
+                localStorage.setItem('inventory', JSON.stringify(inventory));
+                displayInventory();
+                clearFields();
+                document.getElementById('notification').innerText = 'Producto agregado exitosamente';
+            };
+            reader.readAsDataURL(image);
+        }
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

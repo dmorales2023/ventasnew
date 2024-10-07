@@ -1,0 +1,51 @@
+body {
+    background-color: pink;
+    color: purple;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 50px;
+}
+
+h1 {
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+button {
+    font-size: 1.5em;
+    margin: 20px;
+    padding: 20px 40px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: purple;
+    color: white;
+}
+
+button:hover {
+    background-color: darkmagenta;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+.product img, .cart-item img {
+    max-width: 150px;
+    height: auto;
+    object-fit: cover;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 3em;
+    }
+    button {
+        font-size: 1.2em;
+        padding: 15px 30px;
+    }
+    .product img, .cart-item img {
+        max-width: 100px;
+    }
+}
